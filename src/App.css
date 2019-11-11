@@ -17,6 +17,19 @@
   color: white;
 }
 
+.app-table {
+  background-color: #282c34;
+  font-size: calc(1px + 2vmin);
+  color: white;
+}
+
+.app-button {
+  background-color: #282c34;
+  font-size: calc(1px + 2vmin);
+  color: white;
+  border: #09d3ac 1px;
+}
+
 .App-link {
   color: #09d3ac;
 }
