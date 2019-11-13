@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/amortization-calculator/precache-manifest.c8d664d3af8e7a5b1e1ea2dc77f62286.js"
+  "/amortization-calculator/precache-manifest.586762a6ab655e17686f5ef357aa4ff2.js"
 );
 
 self.addEventListener('message', (event) => {
