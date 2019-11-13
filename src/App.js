@@ -37,10 +37,10 @@ class App extends React.Component {
     ],
     amortizationSchedule: [],
   };
-  calculate = () => {
-    const monthlyRate = 3.25 / (100 * 12);
-    const principal = 330000;
-    const yearsDuration = 30;
+  calculate = ({ principal, rate, duration, startDate, extraPayment }) => {
+    const monthlyRate = rate / (100 * 12);
+    // const principal = 330000;
+    const durationMonths = duration * 12;
 
     // const paymentAmountPerPeriod =
     //   initialPrincipal *
@@ -51,10 +51,10 @@ class App extends React.Component {
     const monthlyPayment =
       principal *
       (monthlyRate +
-        monthlyRate / (Math.pow(monthlyRate + 1, yearsDuration * 12) - 1));
+        monthlyRate / (Math.pow(monthlyRate + 1, durationMonths) - 1));
 
     const amortizationSchedule = [];
-    for (let i = 0; i < yearsDuration * 12; i++) {
+    for (let i = 0; i < durationMonths; i++) {
       const prevPrincipal =
         i === 0 ? principal : amortizationSchedule[i - 1].principalBalance;
       const interestPayment = prevPrincipal * monthlyRate;

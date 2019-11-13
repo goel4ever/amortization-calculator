@@ -1,7 +1,8 @@
 import React from 'react';
+import './Footer.css';
 
 export default props => (
-  <div>
-    <h1>Contact me</h1>
+  <div className="footer">
+    <h1>My awesome footer</h1>
   </div>
 );
