@@ -1,10 +1,17 @@
 import React from 'react';
+import { Button, ButtonGroup, Table } from 'react-bootstrap';
 
 import './AmortizationSchedule.css';
 
 export default props => (
-  <section className="app-table">
-    <table>
+  <div style={{ textAlign: 'center' }}>
+    <ButtonGroup aria-label="Basic example">
+      <Button variant="secondary">Monthly</Button>
+      <Button variant="secondary">Yearly</Button>
+      <Button variant="secondary">Custom</Button>
+    </ButtonGroup>
+
+    <Table striped bordered hover size="sm" variant="dark">
       <thead>
         <tr>
           {props.columns.map(column => (
@@ -24,6 +31,6 @@ export default props => (
           </tr>
         ))}
       </tbody>
-    </table>
-  </section>
+    </Table>
+  </div>
 );

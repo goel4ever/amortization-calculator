@@ -1,5 +1,5 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
+import { Button, FormControl, InputGroup } from 'react-bootstrap';
 import './InputForm.css';
 
 class InputForm extends React.Component {
@@ -33,59 +33,74 @@ class InputForm extends React.Component {
     return (
       <form action="#" className="input-form">
         <label name="principal">Principal</label>
-        <div className="input-group">
-          <div className="input-group-icon">$</div>
-          <input
-            className="input-group-area"
-            type="text"
+        <InputGroup>
+          <InputGroup.Prepend>
+            <InputGroup.Text id="basic-addon1">$</InputGroup.Text>
+          </InputGroup.Prepend>
+          <FormControl
             name="principal"
             placeholder="Principal Amount"
             value={this.state.principal}
             onChange={this.changeHandler}
+            aria-label="Username"
+            aria-describedby="basic-addon1"
           />
-        </div>
+        </InputGroup>
         <label name="apr">Interest Rate</label>
-        <div className="input-group">
-          <input
-            className="input-group-area"
-            type="text"
+        <InputGroup>
+          <FormControl
             name="rate"
             placeholder="Annual Interest Rate"
             value={this.state.rate}
             onChange={this.changeHandler}
+            aria-label="Interest Rate"
+            aria-describedby="basic-addon1"
           />
-          <div className="input-group-icon">%</div>
-        </div>
+          <InputGroup.Append>
+            <InputGroup.Text id="basic-addon1">%</InputGroup.Text>
+          </InputGroup.Append>
+        </InputGroup>
         <label name="duration">Duration</label>
-        <div className="input-group">
-          <input
-            className="input-group-area"
-            type="text"
+        <InputGroup>
+          <FormControl
             name="duration"
             placeholder="Duration in years"
             value={this.state.duration}
             onChange={this.changeHandler}
+            aria-label="Duration"
+            aria-describedby="basic-addon1"
           />
-          <div className="input-group-icon">years</div>
-        </div>
+          <InputGroup.Append>
+            <InputGroup.Text id="basic-addon1">years</InputGroup.Text>
+          </InputGroup.Append>
+        </InputGroup>
         <label name="start-on">Start Date</label>
-        <input
-          type="text"
-          name="startDate"
-          placeholder="Start Date..."
-          value={this.state.startDate}
-          onChange={this.changeHandler}
-        />
+        <InputGroup>
+          <FormControl
+            name="startDate"
+            placeholder="Start Date..."
+            value={this.state.startDate}
+            onChange={this.changeHandler}
+            aria-label="Start date"
+            aria-describedby="basic-addon1"
+          />
+        </InputGroup>
         <label name="extra-payment">Extra $/month</label>
-        <input
-          type="text"
-          placeholder="Extra payment per month"
-          name="extraPayment"
-          value={this.state.extraPayment}
-          onChange={this.changeHandler}
-        />
+        <InputGroup>
+          <InputGroup.Prepend>
+            <InputGroup.Text id="basic-addon1">$</InputGroup.Text>
+          </InputGroup.Prepend>
+          <FormControl
+            placeholder="Extra payment per month"
+            name="extraPayment"
+            value={this.state.extraPayment}
+            onChange={this.changeHandler}
+            aria-label="Extra payment"
+            aria-describedby="basic-addon1"
+          />
+        </InputGroup>
         <Button
-          variant="contained"
+          variant="primary"
           color="primary"
           className="full-width"
           onClick={this.submitForm}

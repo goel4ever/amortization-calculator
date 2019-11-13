@@ -3,6 +3,6 @@ import './Footer.css';
 
 export default props => (
   <div className="footer">
-    <h1>My awesome footer</h1>
+    <h3>My awesome footer</h3>
   </div>
 );
