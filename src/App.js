@@ -6,6 +6,11 @@ import InputForm from './Components/Layouts/InputForm';
 import AmortizationSchedule from './Components/Layouts/AmortizationSchedule';
 import Footer from './Components/Layouts/Footer';
 
+const CurrencyFormatter = new Intl.NumberFormat('us-US', {
+  style: 'currency',
+  currency: 'USD',
+});
+
 class App extends React.Component {
   state = {
     monthlyPayment: 0,
@@ -70,11 +75,11 @@ class App extends React.Component {
         interestPayment: interestPayment,
         principalPayment: principalPayment,
         accInterest: accInterest,
-        paymentRounded: Math.floor(monthlyPayment * 100) / 100.0,
-        interestPaymentRounded: Math.floor(interestPayment * 100) / 100.0,
-        principalPaymentRounded: Math.floor(principalPayment * 100) / 100.0,
-        principalBalanceRounded: Math.floor(principalBalance * 100) / 100.0,
-        accInterestRounded: Math.floor(accInterest * 100) / 100.0,
+        paymentRounded: CurrencyFormatter.format(monthlyPayment),
+        interestPaymentRounded: CurrencyFormatter.format(interestPayment),
+        principalPaymentRounded: CurrencyFormatter.format(principalPayment),
+        principalBalanceRounded: CurrencyFormatter.format(principalBalance),
+        accInterestRounded: CurrencyFormatter.format(accInterest),
       });
     }
     this.setState({
