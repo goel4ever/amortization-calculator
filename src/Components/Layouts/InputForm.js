@@ -1,21 +1,26 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
+import './InputForm.css';
 
 export default props => (
-  <div>
-    <h1>Input Form</h1>
+  <div className="input-form">
     <form action="#">
-      Loan Amount:
+      <label name="principal">Principal</label>
       <input type="text" placeholder="Principal Amount" />
-      Annual Interest Rate:
+      <label name="apr">Interest Rate</label>
       <input type="text" placeholder="Rate of interest" />
-      Loan Duration:
+      <label name="duration">Duration</label>
       <input type="text" placeholder="Duration in years" />
-      First Payment Due Date:
+      <label name="start-on">Start Date</label>
       <input type="text" placeholder="Start Date..." />
-      Extra payment per month:
+      <label name="extra-payment">Extra $/month</label>
       <input type="text" placeholder="0" />
-      <Button variant="contained" color="primary">
+      <Button
+        variant="contained"
+        color="primary"
+        className="full-width"
+        onClick={props.onSubmit}
+      >
         Calculate
       </Button>
     </form>

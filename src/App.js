@@ -1,11 +1,9 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import ReactTable from 'react-table';
-import 'react-table/react-table.css';
 
 import Header from './Components/Layouts/Header';
 import InputForm from './Components/Layouts/InputForm';
+import AmortizationSchedule from './Components/Layouts/AmortizationSchedule';
 import Footer from './Components/Layouts/Footer';
 
 class App extends React.Component {
@@ -88,20 +86,14 @@ class App extends React.Component {
     return (
       <div className="app">
         <Header />
-        <InputForm />
+        <InputForm onSubmit={this.calculate} />
 
-        <button onClick={this.calculate} className="app-button">
-          Click me!!
-        </button>
-
-        <section className="app-table">
-          <ReactTable
-            data={this.state.amortizationSchedule}
-            columns={this.state.columns}
-            showPagination={false}
-            defaultPageSize={400}
-          />
-        </section>
+        <AmortizationSchedule
+          data={this.state.amortizationSchedule}
+          columns={this.state.columns}
+          showPagination={false}
+          defaultPageSize={400}
+        />
 
         <Footer />
       </div>
