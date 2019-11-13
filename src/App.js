@@ -4,32 +4,36 @@ import './App.css';
 import ReactTable from 'react-table';
 import 'react-table/react-table.css';
 
+import Header from './Components/Layouts/Header';
+import InputForm from './Components/Layouts/InputForm';
+import Footer from './Components/Layouts/Footer';
+
 class App extends React.Component {
   state = {
     monthlyPayment: 0,
     columns: [
       {
-        Header: 'paymentNumber',
+        Header: '#',
         accessor: 'paymentNumber',
       },
       {
-        Header: 'payment',
+        Header: 'Payment',
         accessor: 'paymentRounded',
       },
       {
-        Header: 'principalPayment',
+        Header: 'Principal',
         accessor: 'principalPaymentRounded',
       },
       {
-        Header: 'interestPayment',
+        Header: 'Interest',
         accessor: 'interestPaymentRounded',
       },
       {
-        Header: 'principalBalance',
+        Header: 'Balance',
         accessor: 'principalBalanceRounded',
       },
       {
-        Header: 'accInterest',
+        Header: 'Accumulated Interest',
         accessor: 'accInterestRounded',
       },
     ],
@@ -37,7 +41,7 @@ class App extends React.Component {
   };
   calculate = () => {
     const monthlyRate = 3.25 / (100 * 12);
-    const principal = 300000;
+    const principal = 330000;
     const yearsDuration = 30;
 
     // const paymentAmountPerPeriod =
@@ -83,16 +87,13 @@ class App extends React.Component {
   render() {
     return (
       <div className="app">
-        <header className="app-header">
-          <p>
-            <input type="text" placeholder="Principal Amount" />
-            <input type="text" placeholder="Rate of interest" />
-            <input type="text" placeholder="Duration in years" />
-            <button onClick={this.calculate} className="app-button">
-              Click me!!
-            </button>
-          </p>
-        </header>
+        <Header />
+        <InputForm />
+
+        <button onClick={this.calculate} className="app-button">
+          Click me!!
+        </button>
+
         <section className="app-table">
           <ReactTable
             data={this.state.amortizationSchedule}
@@ -101,6 +102,8 @@ class App extends React.Component {
             defaultPageSize={400}
           />
         </section>
+
+        <Footer />
       </div>
     );
   }
