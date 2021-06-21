@@ -14,7 +14,7 @@ class InputForm extends React.Component {
   state = {
     principal: 400000,
     rate: 3.85,
-    duration: 30,
+    duration: 15,
     startDate: this.initializeDate(),
     extraPayment: 0,
   };
@@ -22,7 +22,7 @@ class InputForm extends React.Component {
     const date = new Date();
     const month = date.getMonth();
     const year = date.getFullYear();
-    return new Date(year, month + 1, 1).toLocaleDateString();
+    return new Date(year, month + 1, 1);
   }
   changeHandler = event => {
     const name = event.target.name;
@@ -106,45 +106,49 @@ class InputForm extends React.Component {
           Calculate
         </Button>
 
-        <Accordion.Toggle as={Button} variant="link" eventKey="0">
-          More options
-        </Accordion.Toggle>
-        <Accordion.Collapse eventKey="0">
-          <Card.Body>
-            <Form.Row>
-              <Form.Group as="start-on" controlId="formGridSomething">
-                <Form.Label>Start Date</Form.Label>
-                <InputGroup>
-                  <Form.Control
-                    name="startDate"
-                    placeholder="Start Date..."
-                    value={this.state.startDate}
-                    onChange={this.changeHandler}
-                    aria-label="Start date"
-                    aria-describedby="basic-addon1"
-                  />
-                </InputGroup>
-              </Form.Group>
+        <Accordion defaultActiveKey="0">
+          <Card>
+            <Accordion.Toggle as={Button} variant="link" eventKey="0">
+              More options
+            </Accordion.Toggle>
+          </Card>
+          <Accordion.Collapse eventKey="0">
+            <Card.Body>
+              <Form.Row>
+                <Form.Group as="start-on" controlId="formGridSomething">
+                  <Form.Label>Start Date</Form.Label>
+                  <InputGroup>
+                    <Form.Control
+                        name="startDate"
+                        placeholder="Start Date..."
+                        value={this.state.startDate.toLocaleDateString()}
+                        onChange={this.changeHandler}
+                        aria-label="Start date"
+                        aria-describedby="basic-addon1"
+                    />
+                  </InputGroup>
+                </Form.Group>
 
-              <Form.Group as="extra-payment" controlId="formGridSomething">
-                <Form.Label>Extra $/month</Form.Label>
-                <InputGroup>
-                  <InputGroup.Prepend>
-                    <InputGroup.Text id="basic-addon1">$</InputGroup.Text>
-                  </InputGroup.Prepend>
-                  <Form.Control
-                    placeholder="Extra payment per month"
-                    name="extraPayment"
-                    value={this.state.extraPayment}
-                    onChange={this.changeHandler}
-                    aria-label="Extra payment"
-                    aria-describedby="basic-addon1"
-                  />
-                </InputGroup>
-              </Form.Group>
-            </Form.Row>
-          </Card.Body>
-        </Accordion.Collapse>
+                <Form.Group as="extra-payment" controlId="formGridSomething">
+                  <Form.Label>Extra $/month</Form.Label>
+                  <InputGroup>
+                    <InputGroup.Prepend>
+                      <InputGroup.Text id="basic-addon1">$</InputGroup.Text>
+                    </InputGroup.Prepend>
+                    <Form.Control
+                        placeholder="Extra payment per month"
+                        name="extraPayment"
+                        value={this.state.extraPayment}
+                        onChange={this.changeHandler}
+                        aria-label="Extra payment"
+                        aria-describedby="basic-addon1"
+                    />
+                  </InputGroup>
+                </Form.Group>
+              </Form.Row>
+            </Card.Body>
+          </Accordion.Collapse>
+        </Accordion>
       </Form>
     );
   }

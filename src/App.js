@@ -16,7 +16,7 @@ class App extends React.Component {
     monthlyPayment: 0,
     columns: [
       {
-        Header: '#',
+        Header: 'Month',
         accessor: 'paymentNumber',
       },
       {
@@ -45,8 +45,12 @@ class App extends React.Component {
     developer: 'Anshul Goel'
   };
   calculatePayments = ({ principal, rate, duration, startDate, extraPayment }) => {
+
+    if (principal < 0 || rate < 0 || duration < 0 || duration > 40) {
+      return;
+    }
+
     const monthlyRate = rate / (100 * 12);
-    // const principal = 330000;
     const durationMonths = duration * 12;
 
     // const paymentAmountPerPeriod =
@@ -56,33 +60,54 @@ class App extends React.Component {
     //     (Math.pow(interestRatePerPeriod + 1, totalNumberOfPayments) - 1));
 
     const monthlyPayment =
-      principal *
-      (monthlyRate +
-        monthlyRate / (Math.pow(monthlyRate + 1, durationMonths) - 1));
+      principal * (monthlyRate + monthlyRate / (Math.pow(monthlyRate + 1, durationMonths) - 1));
 
+    const stats = {
+      totalAccruedInterest: 0.0,
+      payments: new Map(),
+      principals: new Map(),
+      interests: new Map(),
+    }
     const amortizationSchedule = [];
+    let runningPrincipalBalance = principal;
+    const runningDate = startDate;
+
     for (let i = 0; i < durationMonths; i++) {
-      const prevPrincipal =
-        i === 0 ? principal : amortizationSchedule[i - 1].principalBalance;
-      const interestPayment = prevPrincipal * monthlyRate;
-      const principalPayment = monthlyPayment - interestPayment;
-      const principalBalance = Math.max(prevPrincipal - principalPayment, 0);
-      const accInterest =
-        (i === 0 ? 0 : amortizationSchedule[i - 1].accInterest) +
-        interestPayment;
+      const interestForTheMonth = runningPrincipalBalance * monthlyRate;
+      runningPrincipalBalance = Math.max(runningPrincipalBalance - (monthlyPayment - interestForTheMonth), 0);
+
+      const currentYear = runningDate.getFullYear();
+      const currentMonth = runningDate.getMonth() + 1;
+
+      stats.totalAccruedInterest += interestForTheMonth;
+      if (!stats.interests.has(currentYear)) {
+        stats.payments.set(currentYear, 0.0);
+        stats.principals.set(currentYear, 0.0);
+        stats.interests.set(currentYear, 0.0);
+      }
+      stats.payments.set(currentYear, stats.payments.get(currentYear) + monthlyPayment);
+      stats.principals.set(currentYear, stats.principals.get(currentYear) + (monthlyPayment - interestForTheMonth));
+      stats.interests.set(currentYear, stats.interests.get(currentYear) + interestForTheMonth);
+
       amortizationSchedule.push({
-        paymentNumber: i + 1,
+        paymentNumber: currentYear + '-'
+            + currentMonth.toLocaleString('en-US', {
+                minimumIntegerDigits: 2,
+                useGrouping: false
+              }),
         payment: monthlyPayment,
-        principalBalance: principalBalance,
-        interestPayment: interestPayment,
-        principalPayment: principalPayment,
-        accInterest: accInterest,
+        principalBalance: runningPrincipalBalance,
+        interestPayment: interestForTheMonth,
+        principalPayment: monthlyPayment - interestForTheMonth,
         paymentRounded: CurrencyFormatter.format(monthlyPayment),
-        interestPaymentRounded: CurrencyFormatter.format(interestPayment),
-        principalPaymentRounded: CurrencyFormatter.format(principalPayment),
-        principalBalanceRounded: CurrencyFormatter.format(principalBalance),
-        accInterestRounded: CurrencyFormatter.format(accInterest),
+        interestPaymentRounded: CurrencyFormatter.format(interestForTheMonth),
+        principalPaymentRounded: CurrencyFormatter.format(monthlyPayment - interestForTheMonth),
+        principalBalanceRounded: CurrencyFormatter.format(runningPrincipalBalance),
+        accInterestRounded: CurrencyFormatter.format(stats.totalAccruedInterest),
       });
+
+      // +1 not needed because month starts from zero, and we've added 1 already
+      runningDate.setMonth(currentMonth);
     }
     this.setState({
       monthlyPayment,

@@ -5,11 +5,11 @@ import './AmortizationSchedule.css';
 
 export default props => (
   <div style={{ textAlign: 'center' }}>
-    <ButtonGroup aria-label="Basic example">
-      <Button variant="secondary">Monthly</Button>
-      <Button variant="secondary">Yearly</Button>
-      <Button variant="secondary">Custom</Button>
-    </ButtonGroup>
+    {/*<ButtonGroup aria-label="Basic example">*/}
+    {/*  <Button variant="secondary">Monthly</Button>*/}
+    {/*  <Button variant="secondary">Yearly</Button>*/}
+    {/*  <Button variant="secondary">Custom</Button>*/}
+    {/*</ButtonGroup>*/}
 
     <Table striped bordered hover size="sm" variant="dark">
       <thead>
