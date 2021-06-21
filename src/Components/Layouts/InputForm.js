@@ -6,6 +6,7 @@ import {
   InputGroup,
   Accordion,
   Card,
+  Col,
 } from 'react-bootstrap';
 import './InputForm.css';
 
@@ -39,113 +40,111 @@ class InputForm extends React.Component {
   render() {
     return (
       <Form>
-        <Accordion>
-          <Card>
-            <Card.Header>
-              <Form.Row>
-                <Form.Group as="principal" controlId="formGridSomething">
-                  <Form.Label>Principal</Form.Label>
-                  <InputGroup>
-                    <InputGroup.Prepend>
-                      <InputGroup.Text id="basic-addon1">$</InputGroup.Text>
-                    </InputGroup.Prepend>
-                    <FormControl
-                      name="principal"
-                      placeholder="Principal Amount"
-                      value={this.state.principal}
-                      onChange={this.changeHandler}
-                      aria-label="Username"
-                      aria-describedby="basic-addon1"
-                    />
-                  </InputGroup>
-                </Form.Group>
+        <Form.Group as={Form.Row} controlId="formPrincipalAmount">
+          <Form.Label column sm="2">Principal</Form.Label>
+          <Col sm="10">
+            <InputGroup>
+              <InputGroup.Prepend>
+                <InputGroup.Text id="basic-addon1">$</InputGroup.Text>
+              </InputGroup.Prepend>
+              <Form.Control
+                  name="principal"
+                  placeholder="Principal Amount"
+                  value={this.state.principal}
+                  onChange={this.changeHandler}
+                  aria-label="Principal Amount"
+                  aria-describedby="basic-addon1"
+              />
+            </InputGroup>
+          </Col>
+        </Form.Group>
 
-                <Form.Group as="apr" controlId="formGridSomething">
-                  <Form.Label>Interest Rate</Form.Label>
-                  <InputGroup>
-                    <FormControl
-                      name="rate"
-                      placeholder="Annual Interest Rate"
-                      value={this.state.rate}
-                      onChange={this.changeHandler}
-                      aria-label="Interest Rate"
-                      aria-describedby="basic-addon1"
-                    />
-                    <InputGroup.Append>
-                      <InputGroup.Text id="basic-addon1">%</InputGroup.Text>
-                    </InputGroup.Append>
-                  </InputGroup>
-                </Form.Group>
+        <Form.Group as={Form.Row} controlId="formAprPercentage">
+          <Form.Label column sm="2">Interest Rate</Form.Label>
+          <Col sm="10">
+            <InputGroup>
+              <Form.Control
+                  name="rate"
+                  placeholder="Annual Interest Rate"
+                  value={this.state.rate}
+                  onChange={this.changeHandler}
+                  aria-label="Interest Rate"
+                  aria-describedby="basic-addon1"
+              />
+              <InputGroup.Append>
+                <InputGroup.Text id="basic-addon1">%</InputGroup.Text>
+              </InputGroup.Append>
+            </InputGroup>
+          </Col>
+        </Form.Group>
 
-                <Form.Group as="duration" controlId="formGridSomething">
-                  <Form.Label>Duration</Form.Label>
-                  <InputGroup>
-                    <FormControl
-                      name="duration"
-                      placeholder="Duration in years"
-                      value={this.state.duration}
-                      onChange={this.changeHandler}
-                      aria-label="Duration"
-                      aria-describedby="basic-addon1"
-                    />
-                    <InputGroup.Append>
-                      <InputGroup.Text id="basic-addon1">years</InputGroup.Text>
-                    </InputGroup.Append>
-                  </InputGroup>
-                </Form.Group>
-              </Form.Row>
+        <Form.Group as={Form.Row} controlId="formTermYear">
+          <Form.Label column sm="2">Term</Form.Label>
+          <Col sm="10">
+            <InputGroup>
+              <Form.Control
+                  name="term"
+                  placeholder="Term in years"
+                  value={this.state.duration}
+                  onChange={this.changeHandler}
+                  aria-label="Term"
+                  aria-describedby="basic-addon1"
+              />
+              <InputGroup.Append>
+                <InputGroup.Text id="basic-addon1">years</InputGroup.Text>
+              </InputGroup.Append>
+            </InputGroup>
+          </Col>
+        </Form.Group>
 
-              <Button
-                variant="primary"
-                color="primary"
-                className="full-width"
-                onClick={this.submitForm}
-              >
-                Calculate
-              </Button>
+        <Button
+          variant="primary"
+          color="primary"
+          className="full-width"
+          onClick={this.submitForm}
+        >
+          Calculate
+        </Button>
 
-              <Accordion.Toggle as={Button} variant="link" eventKey="0">
-                More options
-              </Accordion.Toggle>
-            </Card.Header>
-            <Accordion.Collapse eventKey="0">
-              <Card.Body>
-                <Form.Row>
-                  <Form.Group as="start-on" controlId="formGridSomething">
-                    <Form.Label>Start Date</Form.Label>
-                    <InputGroup>
-                      <FormControl
-                        name="startDate"
-                        placeholder="Start Date..."
-                        value={this.state.startDate}
-                        onChange={this.changeHandler}
-                        aria-label="Start date"
-                        aria-describedby="basic-addon1"
-                      />
-                    </InputGroup>
-                  </Form.Group>
+        <Accordion.Toggle as={Button} variant="link" eventKey="0">
+          More options
+        </Accordion.Toggle>
+        <Accordion.Collapse eventKey="0">
+          <Card.Body>
+            <Form.Row>
+              <Form.Group as="start-on" controlId="formGridSomething">
+                <Form.Label>Start Date</Form.Label>
+                <InputGroup>
+                  <Form.Control
+                    name="startDate"
+                    placeholder="Start Date..."
+                    value={this.state.startDate}
+                    onChange={this.changeHandler}
+                    aria-label="Start date"
+                    aria-describedby="basic-addon1"
+                  />
+                </InputGroup>
+              </Form.Group>
 
-                  <Form.Group as="extra-payment" controlId="formGridSomething">
-                    <Form.Label>Extra $/month</Form.Label>
-                    <InputGroup>
-                      <InputGroup.Prepend>
-                        <InputGroup.Text id="basic-addon1">$</InputGroup.Text>
-                      </InputGroup.Prepend>
-                      <FormControl
-                        placeholder="Extra payment per month"
-                        name="extraPayment"
-                        value={this.state.extraPayment}
-                        onChange={this.changeHandler}
-                        aria-label="Extra payment"
-                        aria-describedby="basic-addon1"
-                      />
-                    </InputGroup>
-                  </Form.Group>
-                </Form.Row>
-              </Card.Body>
-            </Accordion.Collapse>
-          </Card>
-        </Accordion>
+              <Form.Group as="extra-payment" controlId="formGridSomething">
+                <Form.Label>Extra $/month</Form.Label>
+                <InputGroup>
+                  <InputGroup.Prepend>
+                    <InputGroup.Text id="basic-addon1">$</InputGroup.Text>
+                  </InputGroup.Prepend>
+                  <Form.Control
+                    placeholder="Extra payment per month"
+                    name="extraPayment"
+                    value={this.state.extraPayment}
+                    onChange={this.changeHandler}
+                    aria-label="Extra payment"
+                    aria-describedby="basic-addon1"
+                  />
+                </InputGroup>
+              </Form.Group>
+            </Form.Row>
+          </Card.Body>
+        </Accordion.Collapse>
       </Form>
     );
   }

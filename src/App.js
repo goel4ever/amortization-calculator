@@ -41,8 +41,10 @@ class App extends React.Component {
       },
     ],
     amortizationSchedule: [],
+    currentYear: (new Date()).getFullYear(),
+    developer: 'Anshul Goel'
   };
-  calculate = ({ principal, rate, duration, startDate, extraPayment }) => {
+  calculatePayments = ({ principal, rate, duration, startDate, extraPayment }) => {
     const monthlyRate = rate / (100 * 12);
     // const principal = 330000;
     const durationMonths = duration * 12;
@@ -91,7 +93,7 @@ class App extends React.Component {
     return (
       <div className="app">
         <Header />
-        <InputForm onSubmit={this.calculate} />
+        <InputForm onSubmit={this.calculatePayments} />
 
         <AmortizationSchedule
           data={this.state.amortizationSchedule}
@@ -100,7 +102,7 @@ class App extends React.Component {
           defaultPageSize={400}
         />
 
-        <Footer />
+        <Footer currentYear={this.state.currentYear } developer={this.state.developer} />
       </div>
     );
   }
