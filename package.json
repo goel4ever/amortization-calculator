@@ -11,7 +11,7 @@
     "react-scripts": "^4.0.3"
   },
   "devDependencies": {
-    "gh-pages": "^1.1.0",
+    "gh-pages": "^4.0.0",
     "normalize-url": ">=4.5.1"
   },
   "scripts": {
