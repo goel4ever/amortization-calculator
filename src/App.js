@@ -42,7 +42,7 @@ class App extends React.Component {
     ],
     amortizationSchedule: [],
     currentYear: (new Date()).getFullYear(),
-    developer: 'Anshul Goel'
+    developer: 'goel4ever'
   };
   calculatePayments = ({ principal, rate, duration, startDate, extraPayment }) => {
 

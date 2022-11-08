@@ -1,18 +1,18 @@
 {
   "name": "amortization-calculator",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "private": true,
   "homepage": "https://goel4ever.github.io/amortization-calculator",
   "dependencies": {
-    "bootstrap": "^4.6.0",
-    "react": "^17.0.2",
-    "react-bootstrap": "^1.6.1",
-    "react-dom": "^17.0.2",
+    "bootstrap": "^5.2.2",
+    "react": "^18.2.0",
+    "react-bootstrap": "^2.6.0",
+    "react-dom": "^18.2.0",
     "react-scripts": "^5.0.1"
   },
   "devDependencies": {
     "gh-pages": "^4.0.0",
-    "normalize-url": ">=4.5.1"
+    "normalize-url": ">=8.0.0"
   },
   "scripts": {
     "start": "react-scripts start",

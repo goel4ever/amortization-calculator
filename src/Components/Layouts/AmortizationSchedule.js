@@ -3,7 +3,7 @@ import { Button, ButtonGroup, Table } from 'react-bootstrap';
 
 import './AmortizationSchedule.css';
 
-export default props => (
+const AmortizationSchedule = props => (
   <div style={{ textAlign: 'center' }}>
     {/*<ButtonGroup aria-label="Basic example">*/}
     {/*  <Button variant="secondary">Monthly</Button>*/}
@@ -34,3 +34,5 @@ export default props => (
     </Table>
   </div>
 );
+
+export default AmortizationSchedule

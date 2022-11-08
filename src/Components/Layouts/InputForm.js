@@ -2,15 +2,14 @@ import React from 'react';
 import {
   Button,
   Form,
-  FormControl,
   InputGroup,
   Accordion,
-  Card,
+  Row,
   Col,
 } from 'react-bootstrap';
 import './InputForm.css';
 
-class InputForm extends React.Component {
+export default class InputForm extends React.Component {
   state = {
     principal: 400000,
     rate: 3.85,
@@ -40,13 +39,11 @@ class InputForm extends React.Component {
   render() {
     return (
       <Form>
-        <Form.Group as={Form.Row} controlId="formPrincipalAmount">
+        <Form.Group as={Row} controlId="formPrincipalAmount">
           <Form.Label column sm="2">Principal</Form.Label>
           <Col sm="10">
             <InputGroup>
-              <InputGroup.Prepend>
-                <InputGroup.Text id="basic-addon1">$</InputGroup.Text>
-              </InputGroup.Prepend>
+              <InputGroup.Text id="basic-addon1">$</InputGroup.Text>
               <Form.Control
                   name="principal"
                   placeholder="Principal Amount"
@@ -59,7 +56,7 @@ class InputForm extends React.Component {
           </Col>
         </Form.Group>
 
-        <Form.Group as={Form.Row} controlId="formAprPercentage">
+        <Form.Group as={Row} controlId="formAprPercentage">
           <Form.Label column sm="2">Interest Rate</Form.Label>
           <Col sm="10">
             <InputGroup>
@@ -71,14 +68,12 @@ class InputForm extends React.Component {
                   aria-label="Interest Rate"
                   aria-describedby="basic-addon1"
               />
-              <InputGroup.Append>
-                <InputGroup.Text id="basic-addon1">%</InputGroup.Text>
-              </InputGroup.Append>
+              <InputGroup.Text id="basic-addon1">%</InputGroup.Text>
             </InputGroup>
           </Col>
         </Form.Group>
 
-        <Form.Group as={Form.Row} controlId="formTermYear">
+        <Form.Group as={Row} controlId="formTermYear">
           <Form.Label column sm="2">Term</Form.Label>
           <Col sm="10">
             <InputGroup>
@@ -90,9 +85,7 @@ class InputForm extends React.Component {
                   aria-label="Term"
                   aria-describedby="basic-addon1"
               />
-              <InputGroup.Append>
-                <InputGroup.Text id="basic-addon1">years</InputGroup.Text>
-              </InputGroup.Append>
+              <InputGroup.Text id="basic-addon1">years</InputGroup.Text>
             </InputGroup>
           </Col>
         </Form.Group>
@@ -106,25 +99,23 @@ class InputForm extends React.Component {
           Calculate
         </Button>
 
-        <Accordion defaultActiveKey="0">
-          <Card>
-            <Accordion.Toggle as={Button} variant="link" eventKey="0">
+        <Accordion>
+          <Accordion.Item eventKey="0">
+            <Accordion.Header as={Button} variant="link" eventKey="0">
               More options
-            </Accordion.Toggle>
-          </Card>
-          <Accordion.Collapse eventKey="0">
-            <Card.Body>
-              <Form.Row>
+            </Accordion.Header>
+            <Accordion.Body>
+              <Row>
                 <Form.Group as="start-on" controlId="formGridSomething">
                   <Form.Label>Start Date</Form.Label>
                   <InputGroup>
                     <Form.Control
-                        name="startDate"
-                        placeholder="Start Date..."
-                        value={this.state.startDate.toLocaleDateString()}
-                        onChange={this.changeHandler}
-                        aria-label="Start date"
-                        aria-describedby="basic-addon1"
+                      name="startDate"
+                      placeholder="Start Date..."
+                      value={this.state.startDate.toLocaleDateString()}
+                      onChange={this.changeHandler}
+                      aria-label="Start date"
+                      aria-describedby="basic-addon1"
                     />
                   </InputGroup>
                 </Form.Group>
@@ -132,26 +123,22 @@ class InputForm extends React.Component {
                 <Form.Group as="extra-payment" controlId="formGridSomething">
                   <Form.Label>Extra $/month</Form.Label>
                   <InputGroup>
-                    <InputGroup.Prepend>
-                      <InputGroup.Text id="basic-addon1">$</InputGroup.Text>
-                    </InputGroup.Prepend>
+                    <InputGroup.Text id="basic-addon1">$</InputGroup.Text>
                     <Form.Control
-                        placeholder="Extra payment per month"
-                        name="extraPayment"
-                        value={this.state.extraPayment}
-                        onChange={this.changeHandler}
-                        aria-label="Extra payment"
-                        aria-describedby="basic-addon1"
+                      placeholder="Extra payment per month"
+                      name="extraPayment"
+                      value={this.state.extraPayment}
+                      onChange={this.changeHandler}
+                      aria-label="Extra payment"
+                      aria-describedby="basic-addon1"
                     />
                   </InputGroup>
                 </Form.Group>
-              </Form.Row>
-            </Card.Body>
-          </Accordion.Collapse>
+              </Row>
+            </Accordion.Body>
+          </Accordion.Item>
         </Accordion>
       </Form>
     );
   }
 }
-
-export default InputForm;
