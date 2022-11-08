@@ -17,3 +17,11 @@ form {
   padding: 10px;
   /*display: flex;*/
 }
+
+.rowPaddingTop {
+  padding-top: 10px;
+}
+
+.full-width {
+  width: 100%;
+}
