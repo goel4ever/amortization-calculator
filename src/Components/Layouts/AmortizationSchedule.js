@@ -1,15 +1,23 @@
 import React from 'react';
-import { Button, ButtonGroup, Table } from 'react-bootstrap';
+import {Button, ButtonGroup, Tab, Table, Tabs} from 'react-bootstrap';
 
 import './AmortizationSchedule.css';
 
 const AmortizationSchedule = props => (
   <div style={{ textAlign: 'center' }}>
-    {/*<ButtonGroup aria-label="Basic example">*/}
-    {/*  <Button variant="secondary">Monthly</Button>*/}
-    {/*  <Button variant="secondary">Yearly</Button>*/}
-    {/*  <Button variant="secondary">Custom</Button>*/}
-    {/*</ButtonGroup>*/}
+    {/*<Tabs defaultActiveKey="profile"*/}
+    {/*      id="uncontrolled-tab-example"*/}
+    {/*      className="mb-3">*/}
+    {/*  <Tab eventKey="home" title="Home" variant="secondary">*/}
+    {/*    Monthly*/}
+    {/*  </Tab>*/}
+    {/*  <Tab eventKey="profile" title="Profile" variant="secondary">*/}
+    {/*    Yearly*/}
+    {/*  </Tab>*/}
+    {/*  <Tab eventKey="contact" title="Contact" disabled variant="secondary">*/}
+    {/*    Custom*/}
+    {/*  </Tab>*/}
+    {/*</Tabs>*/}
 
     <Table striped bordered hover size="sm" variant="dark">
       <thead>
@@ -21,12 +29,12 @@ const AmortizationSchedule = props => (
       </thead>
       <tbody>
         {props.data.map(row => (
-          <tr key={row.paymentNumber}>
-            <td>{row.paymentNumber}</td>
-            <td>{row.paymentRounded}</td>
-            <td>{row.principalPaymentRounded}</td>
-            <td>{row.interestPaymentRounded}</td>
-            <td>{row.principalBalanceRounded}</td>
+          <tr key={row.timeWindow}>
+            <td>{row.timeWindow}</td>
+            <td>{row.paymentRounded()}</td>
+            <td>{row.principalPaymentRounded()}</td>
+            <td>{row.interestPaymentRounded()}</td>
+            <td>{row.remainingBalanceRounded()}</td>
             <td>{row.accInterestRounded}</td>
           </tr>
         ))}

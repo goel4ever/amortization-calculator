@@ -5,6 +5,8 @@ import Header from './Components/Layouts/Header';
 import InputForm from './Components/Layouts/InputForm';
 import AmortizationSchedule from './Components/Layouts/AmortizationSchedule';
 import Footer from './Components/Layouts/Footer';
+import LoanRequest from "./Components/lib/Models/LoanRequest";
+import getSchedule from "./Components/lib/AmortizationService";
 
 const CurrencyFormatter = new Intl.NumberFormat('us-US', {
   style: 'currency',
@@ -49,6 +51,10 @@ class App extends React.Component {
     if (principal < 0 || rate < 0 || duration < 0 || duration > 40) {
       return;
     }
+
+    const loanRequest = new LoanRequest(principal, rate, duration)
+    const loanResponse = getSchedule(loanRequest)
+    console.log(loanResponse)
 
     const monthlyRate = rate / (100 * 12);
     const durationMonths = duration * 12;
@@ -110,8 +116,8 @@ class App extends React.Component {
       runningDate.setMonth(currentMonth);
     }
     this.setState({
-      monthlyPayment,
-      amortizationSchedule,
+      monthlyPayment: loanResponse.monthlyPayment,
+      amortizationSchedule: loanResponse.amortizationSchedule,
     });
   };
   render() {
