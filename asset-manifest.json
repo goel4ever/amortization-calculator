@@ -1,23 +1,13 @@
 {
   "files": {
-    "main.css": "/amortization-calculator/static/css/main.0a87b071.chunk.css",
-    "main.js": "/amortization-calculator/static/js/main.d5cd65b8.chunk.js",
-    "main.js.map": "/amortization-calculator/static/js/main.d5cd65b8.chunk.js.map",
-    "runtime-main.js": "/amortization-calculator/static/js/runtime-main.d4c8eaed.js",
-    "runtime-main.js.map": "/amortization-calculator/static/js/runtime-main.d4c8eaed.js.map",
-    "static/css/2.4c97ca4f.chunk.css": "/amortization-calculator/static/css/2.4c97ca4f.chunk.css",
-    "static/js/2.a01720c5.chunk.js": "/amortization-calculator/static/js/2.a01720c5.chunk.js",
-    "static/js/2.a01720c5.chunk.js.map": "/amortization-calculator/static/js/2.a01720c5.chunk.js.map",
+    "main.css": "/amortization-calculator/static/css/main.c149bf59.css",
+    "main.js": "/amortization-calculator/static/js/main.e7058c53.js",
     "index.html": "/amortization-calculator/index.html",
-    "static/css/2.4c97ca4f.chunk.css.map": "/amortization-calculator/static/css/2.4c97ca4f.chunk.css.map",
-    "static/css/main.0a87b071.chunk.css.map": "/amortization-calculator/static/css/main.0a87b071.chunk.css.map",
-    "static/js/2.a01720c5.chunk.js.LICENSE.txt": "/amortization-calculator/static/js/2.a01720c5.chunk.js.LICENSE.txt"
+    "main.c149bf59.css.map": "/amortization-calculator/static/css/main.c149bf59.css.map",
+    "main.e7058c53.js.map": "/amortization-calculator/static/js/main.e7058c53.js.map"
   },
   "entrypoints": [
-    "static/js/runtime-main.d4c8eaed.js",
-    "static/css/2.4c97ca4f.chunk.css",
-    "static/js/2.a01720c5.chunk.js",
-    "static/css/main.0a87b071.chunk.css",
-    "static/js/main.d5cd65b8.chunk.js"
+    "static/css/main.c149bf59.css",
+    "static/js/main.e7058c53.js"
   ]
 }
