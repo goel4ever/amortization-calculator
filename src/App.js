@@ -47,7 +47,10 @@ class App extends React.Component {
       return;
     }
 
-    const loanRequest = new LoanRequest(principal, rate, duration)
+    const startDateObj = new Date(startDate)
+    const loanRequest = new LoanRequest(
+      principal, rate, duration,
+      startDateObj.getFullYear(), startDateObj.getMonth())
     const loanResponse = getSchedule(loanRequest)
 
     this.setState({

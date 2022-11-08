@@ -3,7 +3,6 @@ import {
   Button,
   Form,
   InputGroup,
-  Accordion,
   Row,
   Col,
 } from 'react-bootstrap';
@@ -21,7 +20,7 @@ export default class InputForm extends React.Component {
     const date = new Date();
     const month = date.getMonth();
     const year = date.getFullYear();
-    return new Date(year, month + 1, 1);
+    return new Date(year, month + 1, 1).toLocaleDateString();
   }
   changeHandler = event => {
     const name = event.target.name;
@@ -85,45 +84,35 @@ export default class InputForm extends React.Component {
         </Form.Group>
 
         <Form.Group as={Row} controlId="formOptional" className="rowPaddingTop">
-          <Accordion>
-            <Accordion.Item eventKey="0">
-              <Accordion.Header as={Button} variant="link">
-                More options
-              </Accordion.Header>
-              <Accordion.Body>
-                <Row>
-                  <Form.Group as="start-on" controlId="formGridSomething">
-                    <Form.Label>Start Date</Form.Label>
-                    <InputGroup>
-                      <Form.Control
-                        name="startDate"
-                        placeholder="Start Date..."
-                        value={this.state.startDate.toLocaleDateString()}
-                        onChange={this.changeHandler}
-                        aria-label="Start date"
-                        aria-describedby="basic-addon1"
-                      />
-                    </InputGroup>
-                  </Form.Group>
+          <Col sm="4">
+            <Form.Label>Start Date</Form.Label>
+            <InputGroup>
+              <Form.Control
+                name="startDate"
+                type="date"
+                placeholder="Start Date..."
+                value={this.state.startDate}
+                onChange={this.changeHandler}
+                aria-label="Start date"
+                aria-describedby="basic-addon1"
+              />
+            </InputGroup>
+          </Col>
 
-                  <Form.Group as="extra-payment" controlId="formGridSomething">
-                    <Form.Label>Extra $/month</Form.Label>
-                    <InputGroup>
-                      <InputGroup.Text id="basic-addon1">$</InputGroup.Text>
-                      <Form.Control
-                        placeholder="Extra payment per month"
-                        name="extraPayment"
-                        value={this.state.extraPayment}
-                        onChange={this.changeHandler}
-                        aria-label="Extra payment"
-                        aria-describedby="basic-addon1"
-                      />
-                    </InputGroup>
-                  </Form.Group>
-                </Row>
-              </Accordion.Body>
-            </Accordion.Item>
-          </Accordion>
+          <Col sm="4">
+            <Form.Label>Extra $/month</Form.Label>
+            <InputGroup>
+              <InputGroup.Text id="basic-addon1">$</InputGroup.Text>
+              <Form.Control
+                placeholder="Extra payment per month"
+                name="extraPayment"
+                value={this.state.extraPayment}
+                onChange={this.changeHandler}
+                aria-label="Extra payment"
+                aria-describedby="basic-addon1"
+              />
+            </InputGroup>
+          </Col>
         </Form.Group>
 
         <Form.Group as={Row} controlId="formSubmit" className="rowPaddingTop">
