@@ -10,6 +10,12 @@ const getSchedule = (loanRequest) => {
   const monthlyRate = loanRequest.interestRate / (100 * 12);
   const durationMonths = loanRequest.durationYears * 12;
 
+  // const paymentAmountPerPeriod =
+  //   initialPrincipal *
+  //   ((interestRatePerPeriod *
+  //     Math.pow(interestRatePerPeriod + 1, totalNumberOfPayments)) /
+  //     (Math.pow(interestRatePerPeriod + 1, totalNumberOfPayments) - 1));
+
   const monthlyPayment =
     loanRequest.principalAmount * (
       monthlyRate + monthlyRate / (Math.pow(monthlyRate + 1, durationMonths) - 1)
@@ -21,9 +27,6 @@ const getSchedule = (loanRequest) => {
   const totalPaymentSummary = new PaymentSummary("all", loanRequest.principalAmount)
 
   for (let i = 0; i < durationMonths; i++) {
-    const interestForTheMonth = runningPrincipalBalance * monthlyRate;
-    runningPrincipalBalance = Math.max(runningPrincipalBalance - (monthlyPayment - interestForTheMonth), 0);
-
     const currentYear = runningDate.getFullYear();
     const currentMonth = runningDate.getMonth() + 1;
 
@@ -35,10 +38,15 @@ const getSchedule = (loanRequest) => {
       currentYearLoanSummary = new PaymentSummary(currentYear, runningPrincipalBalance)
       loanResponse.annualPaymentSummary.set(currentYear, currentYearLoanSummary)
     }
+
+    const interestForTheMonth = runningPrincipalBalance * monthlyRate;
+    runningPrincipalBalance = Math.max(runningPrincipalBalance - (monthlyPayment - interestForTheMonth), 0);
+
     currentYearLoanSummary.totalAmountPaid += monthlyPayment
     currentYearLoanSummary.totalPrincipalPaid += monthlyPayment - interestForTheMonth
     currentYearLoanSummary.totalInterestPaid += interestForTheMonth
     currentYearLoanSummary.numberOfPayments += 1
+    currentYearLoanSummary.remainingBalance = runningPrincipalBalance
     totalPaymentSummary.totalAmountPaid += monthlyPayment
     totalPaymentSummary.totalPrincipalPaid += monthlyPayment - interestForTheMonth
     totalPaymentSummary.totalInterestPaid += interestForTheMonth

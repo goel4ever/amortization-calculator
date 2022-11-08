@@ -1,45 +1,64 @@
 import React from 'react';
-import {Button, ButtonGroup, Tab, Table, Tabs} from 'react-bootstrap';
+import {Tab, Table, Tabs} from 'react-bootstrap';
 
 import './AmortizationSchedule.css';
 
 const AmortizationSchedule = props => (
   <div style={{ textAlign: 'center' }}>
-    {/*<Tabs defaultActiveKey="profile"*/}
-    {/*      id="uncontrolled-tab-example"*/}
-    {/*      className="mb-3">*/}
-    {/*  <Tab eventKey="home" title="Home" variant="secondary">*/}
-    {/*    Monthly*/}
-    {/*  </Tab>*/}
-    {/*  <Tab eventKey="profile" title="Profile" variant="secondary">*/}
-    {/*    Yearly*/}
-    {/*  </Tab>*/}
-    {/*  <Tab eventKey="contact" title="Contact" disabled variant="secondary">*/}
-    {/*    Custom*/}
-    {/*  </Tab>*/}
-    {/*</Tabs>*/}
-
-    <Table striped bordered hover size="sm" variant="dark">
-      <thead>
-        <tr>
-          {props.columns.map(column => (
-            <th key={column.accessor}>{column.Header}</th>
-          ))}
-        </tr>
-      </thead>
-      <tbody>
-        {props.data.map(row => (
-          <tr key={row.timeWindow}>
-            <td>{row.timeWindow}</td>
-            <td>{row.paymentRounded()}</td>
-            <td>{row.principalPaymentRounded()}</td>
-            <td>{row.interestPaymentRounded()}</td>
-            <td>{row.remainingBalanceRounded()}</td>
-            <td>{row.accInterestRounded}</td>
+    <Tabs defaultActiveKey="monthly"
+          id="amortized-payments-tab"
+          className="mb-3"
+          justify>
+      <Tab eventKey="monthly" title="Monthly Breakdown">
+        <Table striped bordered hover size="sm" variant="dark">
+          <thead>
+          <tr>
+            {props.columns.map(column => (
+              <th key={column.accessor}>{column.Header}</th>
+            ))}
           </tr>
-        ))}
-      </tbody>
-    </Table>
+          </thead>
+          <tbody>
+          {props.data.amortizationSchedule.map(row => (
+            <tr key={row.timeWindow}>
+              <td>{row.timeWindow}</td>
+              <td>{row.principalPaymentRounded()}</td>
+              <td>{row.interestPaymentRounded()}</td>
+              <td>{row.paymentRounded()}</td>
+              <td>{row.remainingBalanceRounded()}</td>
+            </tr>
+          ))}
+          </tbody>
+        </Table>
+      </Tab>
+
+      <Tab eventKey="yearly" title="Yearly">
+        <Table striped bordered hover size="sm" variant="dark">
+          <thead>
+          <tr>
+            {props.columns.map(column => (
+              <th key={column.accessor}>{column.Header}</th>
+            ))}
+          </tr>
+          </thead>
+          <tbody>
+          {Array.from(props.data.annualPaymentSummary.values()).map(row => (
+            <tr key={row.timeWindow}>
+              <td>{row.timeWindow}</td>
+              <td>{row.principalPaymentRounded()}</td>
+              <td>{row.interestPaymentRounded()}</td>
+              <td>{row.paymentRounded()}</td>
+              <td>{row.remainingBalanceRounded()}</td>
+            </tr>
+          ))}
+          </tbody>
+        </Table>
+      </Tab>
+
+      <Tab eventKey="custom" title="Better Visual Formatting" disabled>
+        Custom
+      </Tab>
+    </Tabs>
   </div>
 );
 
