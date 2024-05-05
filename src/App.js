@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactGA from 'react-ga4';
 import './App.css';
 
 import Header from './Components/Layouts/Header';
@@ -72,6 +73,12 @@ class App extends React.Component {
     });
   };
   render() {
+    ReactGA.send({
+      hitType: 'pageview',
+      page: window.location.pathname + window.location.search,
+      title: 'Amortization Calculator Home Page',
+    });
+
     return (
       <Container fluid>
         <Row>

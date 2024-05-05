@@ -21,4 +21,3 @@ pnpm run deploy
 You'll be able to view the page on:
 1. [localhost](http://localhost:3000/amortization-calculator)
 2. [production](https://goel4ever.github.io/amortization-calculator)
-3. 
