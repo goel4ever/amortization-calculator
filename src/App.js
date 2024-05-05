@@ -5,8 +5,10 @@ import Header from './Components/Layouts/Header';
 import InputForm from './Components/Layouts/InputForm';
 import AmortizationSchedule from './Components/Layouts/AmortizationSchedule';
 import Footer from './Components/Layouts/Footer';
-import LoanRequest from "./Components/lib/Models/LoanRequest";
-import getSchedule from "./Components/lib/AmortizationService";
+import LoanRequest from "./Components/lib/api/LoanRequest";
+import getLoanSchedule from "./Components/lib/api/AmortizationService";
+import {Col, Container, Row} from "react-bootstrap";
+import Summary from "./Components/Layouts/Summary";
 
 class App extends React.Component {
   state = {
@@ -37,10 +39,13 @@ class App extends React.Component {
     loanResponse: {
       amortizationSchedule: [],
       annualPaymentSummary: new Map(),
+      totalPaymentSummary: null,
     },
+    totalInterestPaid: 0,
+    totalAmountPaid: 0,
     currentYear: (new Date()).getFullYear(),
     developer: 'goel4ever'
-  };
+  }
   calculatePayments = ({ principal, rate, duration, startDate, extraPayment }) => {
 
     if (principal < 0 || rate < 0 || duration < 0 || duration > 40) {
@@ -51,29 +56,54 @@ class App extends React.Component {
     const loanRequest = new LoanRequest(
       principal, rate, duration,
       startDateObj.getFullYear(), startDateObj.getMonth())
-    const loanResponse = getSchedule(loanRequest)
+    const loanResponse = getLoanSchedule(loanRequest)
+    // console.log(loanResponse)
 
     this.setState({
       monthlyPayment: loanResponse.monthlyPayment,
       amortizationSchedule: loanResponse.amortizationSchedule,
-      loanResponse,
+      totalInterestPaid: loanResponse.totalPaymentSummary.totalInterestPaid,
+      totalAmountPaid: loanResponse.totalPaymentSummary.totalAmountPaid,
+      loanResponse: loanResponse,
     });
   };
   render() {
     return (
-      <div className="app">
-        <Header />
-        <InputForm onSubmit={this.calculatePayments} />
+      <Container fluid>
+        <Row>
+          <Col><Header developer={this.state.developer} /></Col>
+        </Row>
+        <Row>
+          <Col>&nbsp;</Col>
+        </Row>
+        <Row>
+          <Col sm="3">
+            <InputForm onSubmit={this.calculatePayments} />
+          </Col>
+          <Col sm="9">
+            <Summary
+              monthlyPayment={this.state.monthlyPayment}
+              totalInterestPaid={this.state.totalInterestPaid}
+              sumOfPayments={this.state.totalAmountPaid}
+              payoffDate="2030-12-31"
+            />
 
-        <AmortizationSchedule
-          data={this.state.loanResponse}
-          columns={this.state.columns}
-          showPagination={false}
-          defaultPageSize={400}
-        />
+            <br />
 
-        <Footer currentYear={this.state.currentYear } developer={this.state.developer} />
-      </div>
+            <AmortizationSchedule
+              data={this.state.loanResponse}
+              columns={this.state.columns}
+              showPagination={false}
+              defaultPageSize={400}
+            />
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <Footer currentYear={this.state.currentYear } developer={this.state.developer} />
+          </Col>
+        </Row>
+      </Container>
     );
   }
 }
