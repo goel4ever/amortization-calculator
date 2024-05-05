@@ -39,10 +39,10 @@ class App extends React.Component {
     loanResponse: {
       amortizationSchedule: [],
       annualPaymentSummary: new Map(),
-      totalPaymentSummary: null,
     },
     totalInterestPaid: 0,
     totalAmountPaid: 0,
+    payoffDate: '',
     currentYear: (new Date()).getFullYear(),
     developer: 'goel4ever'
   }
@@ -54,17 +54,21 @@ class App extends React.Component {
 
     const startDateObj = new Date(startDate)
     const loanRequest = new LoanRequest(
-      principal, rate, duration,
-      startDateObj.getFullYear(), startDateObj.getMonth())
+      principal,
+      rate,
+      duration,
+      startDateObj.getFullYear(),
+      startDateObj.getMonth()
+    )
     const loanResponse = getLoanSchedule(loanRequest)
-    // console.log(loanResponse)
 
     this.setState({
       monthlyPayment: loanResponse.monthlyPayment,
       amortizationSchedule: loanResponse.amortizationSchedule,
       totalInterestPaid: loanResponse.totalPaymentSummary.totalInterestPaid,
       totalAmountPaid: loanResponse.totalPaymentSummary.totalAmountPaid,
-      loanResponse: loanResponse,
+      payoffDate: loanResponse.payOffDate,
+      loanResponse,
     });
   };
   render() {
@@ -85,7 +89,7 @@ class App extends React.Component {
               monthlyPayment={this.state.monthlyPayment}
               totalInterestPaid={this.state.totalInterestPaid}
               sumOfPayments={this.state.totalAmountPaid}
-              payoffDate="2030-12-31"
+              payoffDate={this.state.payoffDate}
             />
 
             <br />

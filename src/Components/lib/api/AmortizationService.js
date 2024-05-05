@@ -61,6 +61,13 @@ const getLoanSchedule = (loanRequest) => {
   }
 
   loanResponse.totalPaymentSummary = totalPaymentSummary;
+  if (totalPaymentSummary.numberOfPayments > 0) {
+    let dateStr = (runningDate + totalPaymentSummary.numberOfPayments).slice(0, -1); // remove the trailing "1"
+    let date = new Date(dateStr);
+    let monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    let formattedDate = monthNames[date.getMonth()] + ' ' + date.getFullYear();
+    loanResponse.setPayOffDate(formattedDate);
+  }
 
   return loanResponse;
 };
