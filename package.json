@@ -4,7 +4,7 @@
   "private": true,
   "homepage": "https://goel4ever.github.io/amortization-calculator",
   "dependencies": {
-    "bootstrap": "^5.3.3",
+    "bootstrap": "^5.3.6",
     "react": "^19.1.0",
     "react-bootstrap": "^2.10.9",
     "react-dom": "^19.1.0",
