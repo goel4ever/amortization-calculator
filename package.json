@@ -13,7 +13,7 @@
   },
   "devDependencies": {
     "gh-pages": ">=6.3.0",
-    "normalize-url": "^8.0.1"
+    "normalize-url": "^8.0.2"
   },
   "scripts": {
     "start": "react-scripts start",
